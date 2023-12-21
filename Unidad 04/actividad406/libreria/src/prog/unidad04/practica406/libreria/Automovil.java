@@ -53,7 +53,7 @@ public class Automovil extends Vehiculo implements ConvertibleATexto {
   @Override
   public String aTexto() {
     return "Matricula: " + matricula + ", Fecha Matriculacion: "
-      + fechaMatriculacion.aTexto() + ", Color:"  + color + ", Num. Plazas: " + plazas;
+      + fechaMatriculacion.aTexto() + ", Color: "  + color + ", Num. Plazas: " + plazas;
   }
 
   /**
@@ -76,9 +76,9 @@ public class Automovil extends Vehiculo implements ConvertibleATexto {
    * @return true si es valido o false si no lo es
    */
   private boolean esColorValido(String color) {
-    return (color != null && color.equals(COLOR_BLANCO)
+    return (color != null && (color.equals(COLOR_BLANCO)
       || color.equals(COLOR_AZUL)
-      || color.equals(COLOR_NEGRO));
+      || color.equals(COLOR_NEGRO)));
   }
 
 }

@@ -157,6 +157,6 @@ class TestMotocicleta {
     // Caso: Crea una motocicleta y la convierte a texto
     // Resultado esperado: la motoocicleta en texto
     ConvertibleATexto convertible = new Motocicleta("1111 AAA", new Fecha(1,10,2023), 750);
-    assertEquals("Matricula: 1111 AAA, Fecha Matriculacion: 1 de octubre de 2023, cilindrada: 750", convertible.aTexto());
+    assertEquals("Matricula: 1111 AAA, Fecha Matriculacion: 1 de octubre de 2023, Cilindrada: 750", convertible.aTexto());
   }
 }

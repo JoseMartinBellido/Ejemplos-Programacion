@@ -167,6 +167,6 @@ class TestAutomovil {
     // Caso: Crea un automovil y lo convierte a texto
     // Resultado esperado: el automovil en texto
     ConvertibleATexto convertible = new Automovil("1111 AAA", new Fecha(1,10,2023), Automovil.COLOR_BLANCO, 4);
-    assertEquals("Matricula: 1111 AAA, Fecha Matriculacion: 1 de octubre de 2023, color: blanco, Num. Plazas: 4", convertible.aTexto());
+    assertEquals("Matricula: 1111 AAA, Fecha Matriculacion: 1 de octubre de 2023, Color: blanco, Num. Plazas: 4", convertible.aTexto());
   }
 }
