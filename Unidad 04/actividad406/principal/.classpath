@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/mmontoro/projects/material/programacion-1-dam-publico/Unidad 04/actividad406/principal/libreria.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/practica406_libreria"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
