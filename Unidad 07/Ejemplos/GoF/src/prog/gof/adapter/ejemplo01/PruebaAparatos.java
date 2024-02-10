@@ -9,23 +9,19 @@ import java.util.List;
 public class PruebaAparatos {
   
   public static void main(String[] args) {
-    List<Aparato> aparatosEuropeos = new ArrayList<>();
-    List<Appliance> aparatosAmericanos = new ArrayList<>();
+    // Crea la case
+    CasaConectada casa = new CasaConectada();
     
-    aparatosEuropeos.add(new Lampara());
-    aparatosEuropeos.add(new Lavadora());
+    // Añade los aparatos
+    casa.addAparato(new Lampara());
+    casa.addAparato(new Lavadora());
+    // Estos dos no se pueden añadir porque son incompatibles
+    //casa.addAparato(new CoffeeMaker());
+    //casa.addAparato(new CoffeeMill());
     
-    aparatosAmericanos.add(new CoffeeMaker());
-    aparatosAmericanos.add(new CoffeeMill());
-    
-    for (Aparato aparato: aparatosEuropeos) {
-      aparato.encender();
-      aparato.apagar();
-    }
-
-    for (Appliance aparato: aparatosAmericanos) {
-      aparato.on();
-      aparato.off();
-    }
+    // Enciende los aparatos
+    casa.encender();
+    // Y los apaga
+    casa.apagar();
   }
 }
