@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.function.BiFunction;
 import java.awt.event.ActionEvent;
 
 public class CalculadoraSwingApp {
@@ -66,7 +67,7 @@ public class CalculadoraSwingApp {
     JButton btnSuma = new JButton("Suma");
     btnSuma.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        realizaOperacion('+');
+        realizaOperacion((a, b) -> a + b);
       }
 
     });
@@ -74,21 +75,21 @@ public class CalculadoraSwingApp {
     JButton btnResta = new JButton("Resta");
     btnResta.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        realizaOperacion('-');
+        realizaOperacion((a, b) -> a - b);
       }
     });
     
     JButton btnProducto = new JButton("Producto");
     btnProducto.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        realizaOperacion('*');
+        realizaOperacion((a, b) -> a * b);
       }
     });
     
     JButton btnDivision = new JButton("Division");
     btnDivision.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        realizaOperacion('/');
+        realizaOperacion((a, b) -> a / b);
       }
     });
     GroupLayout groupLayout = new GroupLayout(frmCalculador.getContentPane());
@@ -106,18 +107,14 @@ public class CalculadoraSwingApp {
                 .addComponent(txtPimerOperando, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addComponent(txtSegundoOperando, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
             .addComponent(lblResultado))
-          .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-            .addGroup(groupLayout.createSequentialGroup()
-              .addGap(37)
-              .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addComponent(btnDivision)
-                .addComponent(btnProducto)
-                .addComponent(btnResta))
-              .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(groupLayout.createSequentialGroup()
-              .addPreferredGap(ComponentPlacement.RELATED)
+          .addGap(37)
+          .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+            .addComponent(btnDivision)
+            .addComponent(btnProducto)
+            .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
               .addComponent(btnSuma)
-              .addContainerGap())))
+              .addComponent(btnResta)))
+          .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     groupLayout.setVerticalGroup(
       groupLayout.createParallelGroup(Alignment.LEADING)
@@ -141,7 +138,7 @@ public class CalculadoraSwingApp {
               .addComponent(btnProducto)))
           .addPreferredGap(ComponentPlacement.UNRELATED)
           .addComponent(btnDivision)
-          .addContainerGap(14, Short.MAX_VALUE))
+          .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     frmCalculador.getContentPane().setLayout(groupLayout);
   }
@@ -181,5 +178,24 @@ public class CalculadoraSwingApp {
         break;
     }
     lblResultado.setText(String.format("Resultado: %.2f", resultado));
+  }
+  
+  protected void realizaOperacion(BiFunction<Double, Double, Double> operacion) {
+    double primerOperando;
+    try {
+      primerOperando = Double.parseDouble(txtPimerOperando.getText());
+    } catch (NumberFormatException e) {
+      JOptionPane.showMessageDialog(null, "El primer operando no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    double segundoOperando;
+    try {
+      segundoOperando = Double.parseDouble(txtSegundoOperando.getText());
+    } catch (NumberFormatException e) {
+      JOptionPane.showMessageDialog(null, "El segundo operando no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    lblResultado.setText(String.format("Resultado: %.2f", operacion.apply(primerOperando, segundoOperando)));
+
   }
 }
